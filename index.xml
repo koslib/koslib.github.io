@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>koslib</title>
+    <link>https://koslibpro.github.io/</link>
+    <description>Recent content on koslib</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://koslibpro.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hello, world!</title>
+      <link>https://koslibpro.github.io/posts/hello-world/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://koslibpro.github.io/posts/hello-world/</guid>
+      <description>Yet another attempt to revive my blog and shed some light into stuff I&amp;rsquo;m working on and I personally find interesting. Consider this a personal challenge of myself to express in writing every day stuff that I do and attract my attention, and could potentially be professionally (or not) beneficial for others as well.
+In this blog I&amp;rsquo;ll be writing mostly about:
+ Python and Go best-practises Microservices and my experiences with service oriented architectures AWS deployments Kubernetes deployments and one thing or two that I pick up on my way  Feel free to DM me on Twitter if you have a topic you&amp;rsquo;d like me to elaborate on, or hop on a brainstorming video chat, or generally just exchange ideas about technologies.</description>
+    </item>
+    
+    <item>
+      <title>whoami</title>
+      <link>https://koslibpro.github.io/page/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://koslibpro.github.io/page/about/</guid>
+      <description>My name is Konstantinos Livieratos, just Kostas for short. Curious about everything by nature, software engineer by day and night.
+ Backend engineer at Detectify, at the Core Services Team I&amp;rsquo;m obsessed with Scandinavian design I speak mainly Python and Go Live in magnificent Stockholm, Sweden Huge believer of DevOps discipline My hands are dirty all day long with Kubernetes and containers Certified AWS Solutions Architect, toying around with DigitalOcean too  What else do you need?</description>
+    </item>
+    
+  </channel>
+</rss>
