@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>You need to be this tall to do micro-services - koslib</title>
+  <meta name="description" content="Hello, is this thing on?
+Alright, now that we&rsquo;ve established that this is a place where I publicly write about my experiences, I thought it&rsquo;d be interesting to start with &ldquo;all the steps you need to do before you consider yourself doing micro-services the right way&rdquo;.
+Some background About a decade back, I was an entry-level software engineer. I was working alone on small projects, while I was breaking into all the new technologies.">
+  <meta name="author" content="Konstantinos Livieratos"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "koslib",
+    
+    "url": "https:\/\/www.koslib.com"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.koslib.com"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/www.koslib.com",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/www.koslib.com\/posts\/microservices-101\/",
+          "name": "You need to be this tall to do micro services"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Konstantinos Livieratos"
+  },
+  "headline": "You need to be this tall to do micro-services",
+  "description" : "Hello, is this thing on?\nAlright, now that we\x26rsquo;ve established that this is a place where I publicly write about my experiences, I thought it\x26rsquo;d be interesting to start with \x26ldquo;all the steps you need to do before you consider yourself doing micro-services the right way\x26rdquo;.\nSome background About a decade back, I was an entry-level software engineer. I was working alone on small projects, while I was breaking into all the new technologies.",
+  "inLanguage" : "en",
+  "wordCount":  1643 ,
+  "datePublished" : "2020-04-12T00:00:00",
+  "dateModified" : "2020-04-12T00:00:00",
+  "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
+  "keywords" : [ "microservices, cloud, deployments, service oriented architecture" ],
+  "mainEntityOfPage" : "https:\/\/www.koslib.com\/posts\/microservices-101\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/www.koslib.com",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="You need to be this tall to do micro-services" />
+<meta property="og:description" content="Hello, is this thing on?
+Alright, now that we&rsquo;ve established that this is a place where I publicly write about my experiences, I thought it&rsquo;d be interesting to start with &ldquo;all the steps you need to do before you consider yourself doing micro-services the right way&rdquo;.
+Some background About a decade back, I was an entry-level software engineer. I was working alone on small projects, while I was breaking into all the new technologies.">
+<meta property="og:image" content="https://www.koslib.com/img/me_rect.jpg" />
+<meta property="og:url" content="https://www.koslib.com/posts/microservices-101/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="koslib" />
+
+  <meta name="twitter:title" content="You need to be this tall to do micro-services" />
+  <meta name="twitter:description" content="Hello, is this thing on?
+Alright, now that we&rsquo;ve established that this is a place where I publicly write about my experiences, I thought it&rsquo;d be interesting to start with &ldquo;all the …">
+  <meta name="twitter:image" content="https://www.koslib.com/img/me_rect.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@koslib" />
+  <meta name="twitter:creator" content="@koslib" />
+  <link href='https://www.koslib.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.67.0" />
+  <link rel="alternate" href="https://www.koslib.com/index.xml" type="application/rss+xml" title="koslib"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://www.koslib.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.koslib.com/css/highlight.min.css" /><link rel="stylesheet" href="https://www.koslib.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163448837-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://www.koslib.com">koslib</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="koslib" href="https://www.koslib.com">
+            <img class="avatar-img" src="https://www.koslib.com/img/me_rect.jpg" alt="koslib" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>You need to be this tall to do micro-services</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Hello, is this thing on?</p>
+<p>Alright, now that we&rsquo;ve established that this is a place where <a href="/posts/hello-world/">I publicly write about my experiences</a>, I thought it&rsquo;d be interesting to start with &ldquo;all the steps you need to do before you consider yourself doing micro-services the right way&rdquo;.</p>
+<h3 id="some-background">Some background</h3>
+<p>About a decade back, I was an entry-level software engineer.  I was working alone on small projects, while I was breaking into all the new technologies.  Containers were not a hot topic back then. I was deploying on VMs, using <a href="http://supervisord.org">supervisor</a>, <a href="http://www.fabfile.org/">fabric</a>, and provisioned infrastructure by hand (you know, doing button clicks on AWS dashboard). I&rsquo;m not even sure if micro-services where a concept at that point, but I have vague memories of SOA appearing in more and more tech articles.</p>
+<p>Fast forward in 2020, the tech stack I&rsquo;m working on is almost entirely different. Golang, Python, everything containerized - usually Kubernetized. Quite often in a microservices-based architecture, when the circumstances call for it.</p>
+<h4 id="todays-state">Today&rsquo;s state</h4>
+<p>Based on my professional experiences so far, I&rsquo;ve come to the understanding that there is a wide list of maestries you need think of, if you&rsquo;d like to deploy a full-blown micro-services based sophisticated system. And this may be confusing for newcomers to this space, or just entry-level software engineers who wonder how the heck tons of small components get wired up together and backend engineers can have  a hollistic overview of them.</p>
+<p>So I compiled a list, of the most critical bits and pieces in the micro-services world.</p>
+<h3 id="are-you-sure">Are you sure?</h3>
+<p>Before you start building your new shiny product or chop off your monolith in micro-services, you  also need to evaluate the weaknesses to avoid some pitfalls. Micro-services come with</p>
+<ul>
+<li><em>scalability</em>: smaller, ofter simpler apps, easily adjustable in terms of replication, sharding or load-balancing</li>
+<li><em>cleaner codebase</em>: a smaller codebase is easier to maintain in a clean and understandable state</li>
+<li><em>independence</em>: services are independent by all means, offering liberty in decisions, eg. deployments or database migrations</li>
+<li><em>performance</em>: cluttering can be avoided and usually independent services use isolated hardware resources as well, eg. database server</li>
+</ul>
+<p>But it would only be fair if I gave you a heads-up of the downside as well:</p>
+<ul>
+<li><em>overhead</em>: architecture becomes more complicated, you may resolve your monolithic-derriving issues but you sign up to a ton more and you just need to do more and better planning.</li>
+<li><em>data seggregation</em>: this is related to the <em>performance</em> part of the upsides list. As databases tend to be separated and resources isolated, that also means data living in them are separate. Marshalling/unmarshalling data from other services is a pain as well, especially if <code>interface{}</code> is your favorite field data type.</li>
+<li><em>operations complexity</em>: yes, your operations will become 10x more complicated. You will need to provision and maintain new layers of abstractions that you did not have before. Both your Dev and Ops teams will need to adjust to this, it is not a plain simple lift-and-shift process.</li>
+</ul>
+<p>Are you still up for the challenge? Read on.</p>
+<h3 id="cicd">CI/CD</h3>
+<p>First of all, you need to have a working CI/CD infrastructure, functioning like a well-oiled machine. If you don&rsquo;t, start investing ASAP in achieving that. <a href="https://docs.gitlab.com/ee/ci/">Gitlab</a> can help to that  and they have an interesting feature called <a href="https://docs.gitlab.com/ee/topics/autodevops/">Auto DevOps</a> for you who don&rsquo;t have dedicated ops teams to take care of it. That could be a very good starting point.</p>
+<p>Each service can and will have it&rsquo;s own CI pipeline. Adaptations may be necessary for some of them, but my suggested pipeline steps are:</p>
+<ul>
+<li>build</li>
+<li>test</li>
+<li>code quality check</li>
+<li>basic load testing</li>
+<li>push to registry (for dockerized environments)</li>
+<li>deploy</li>
+<li>cleanup</li>
+</ul>
+<p>Also, MS Azure has <a href="https://docs.microsoft.com/en-us/azure/architecture/microservices/ci-cd">published</a> a fairly good article on this topic.</p>
+<h3 id="monitoring-and-observability">Monitoring and Observability</h3>
+<p>So many buzzwords here: grafana, prometheus, loki, ELK, influxDB, graphite, and much more.</p>
+<p>The main purpose here is to:</p>
+<ul>
+<li>have a time-series DB to keep your metrics data. Set a retention period of at least 20 days, to be able to debug stuff recursively and not only using last-hours metrics.</li>
+<li>have a dashboard to visualize  those metrics. Create different screens to aggregate data and also have service-level visibility.</li>
+<li>set up alerts to get notified when things go south. Shoutout to <a href="https://prometheus.io/docs/alerting/alertmanager/">AlertManager</a> for this.</li>
+</ul>
+<p>Those said, in the code side mind that you should:</p>
+<ul>
+<li>export service metrics that are relevant to the service you&rsquo;re building.</li>
+<li>set healthchecks up. Those are not only useful to be on top of uptime metrics, but also to kill off eg. erroneous app instances (cc containers/pods in the K8s world) and spin up new ones.</li>
+</ul>
+<p>Want something simple? Get started with a <a href="https://grafana.com/oss/loki/">Loki/Grafana</a> setup.</p>
+<h4 id="logging">Logging</h4>
+<p>Distributed logging is a thing. Especially if we combine it with the <a href="#monitoring-and-observability">Monitoring and Observability</a> part, it&rsquo;s a win-win situation. For example, Loki automatically grabs your container logs.</p>
+<p>You could go 3rd-party as well. SaaS offerings that are good in this area incluce <a href="https://www.datadoghq.com/">Datadog</a>, <a href="https://newrelic.com/">New Relic</a> and <a href="https://rollbar.com/">Rollbar</a>.</p>
+<h4 id="tracing">Tracing</h4>
+<p>Something went wrong. You need to understand what happened. In a monolithic environment, checking the logs would be sufficient to understand what happened.</p>
+<p>In micro-services, there&rsquo;s a chain of events that happened for every single outcome. Multiple different services where involved, infrastructure failed in the meantime and a forgotten comma in service&rsquo;s X code caused some failed responses. You need to be able to track the series of events that resulted in failure in order to troubleshoot transactions in a complex distributed system.</p>
+<p><a href="https://www.jaegertracing.io/">Jaeger</a> is a good project for that, and graduated CNSF (I tend to be very favorable towards CNSF projects).</p>
+<h3 id="internal-tooling">Internal tooling</h3>
+<p>You will be surprised how much code will be shared between teams. Tools for logging and debugging. Service skeletons for setting up new database connections, manage application secrets, establish that RabbitMQ connection on the 2nd try because the 1st one failed. Apply exponential backoffs when rate limited by an external API. And much more.</p>
+<p>Get ready to invest a lot of time in designing and building internal tooling. Try to have your teams in sync. The core components can and many times should be shared.</p>
+<h3 id="testing--unit-api-integration">Testing  (unit, api, integration)</h3>
+<p>Many services means less time for manual e2e testing. Automate things and set them to fail early if needed (that&rsquo;s why you need a <a href="#cicd">working</a> CI/CD infrastructure).</p>
+<ul>
+<li>Test your models and create unit tests</li>
+<li>Test your functionality and mock stuff</li>
+<li>Create integration tests to avoid huge surprises later on</li>
+<li>Give your API endpoints a go  (via tests) before releasing a service</li>
+</ul>
+<h3 id="apis-and-interfaces">APIs and interfaces</h3>
+<p>Services need to communicate between each other. Events messaging automatically comes to mind, with a message queue system (eg. <a href="https://www.rabbitmq.com/">RabbitMQ</a>, <a href="https://nats.io/">NATS</a>, etc). However, there are cases where syncronous responses will be needed based on your business requirements.</p>
+<p>Exposing good internal APIs is the first step here. Avoid re-using public APIs for internal use (or the opposite, which seems scary IMO). Implement drivers for your newly-created services, consuming the service&rsquo;s internal API but returning DTOs/data-models - take care of marshalling/unmarshalling as well.</p>
+<p>That  said, when desining for micro-services, you need to have a solid idea of contracts between your services, as the architecture depends on that.</p>
+<h3 id="scheduling-and-orchestration">Scheduling and orchestration</h3>
+<p>Alright, enough with hiding behind our finger. We&rsquo;re talking about <em>Docker containers</em> all this time.</p>
+<p>And when we&rsquo;re talking about Docker containers, we need to pick our path in terms of scheduler and orchestrator before shipping anything to production.</p>
+<p>The choice generally come down to these options:</p>
+<ol>
+<li><strong>Docker Swarm</strong>: comes with <code>docker</code> installations and is a complete, yet simple container orchestrator.</li>
+<li><strong>Kubernetes</strong>: Google product, heavily battle tested and a hype as well nowadays. This is not exactly a scheduler, as it is a huge project combining a dozen of different components, one of them being scheduling your containers. For production workloads where you need sophisticated integrations and operations automation, that is a very solid choice.</li>
+<li><strong>Nomad</strong>: plain simple, <em>just</em> ultra-light scheduling (35Mb executable). This is another Hashicorp product, and you can expect 1st-class support and integrations with the rest of the Hashicorp product suite, eg. Consul for service discovery and more, or Vault for secrets management.</li>
+</ol>
+<h3 id="service-discovery">Service discovery</h3>
+<p>Or, to service-mesh or not?</p>
+<p>Your services will need to somehow communicate with each other. Find what&rsquo;s suitable for you. In a <code>docker-compose.yaml</code>-based stup, the integrated service discovery mechanism could be sufficient in a simple architecture. What if you have hybrid infrastructure spread out to a multi-region deployment or even combining different cloud providers?</p>
+<p>Service meshes have come into play lately. They are an abstraction layer for your networking needs that take care the communication between your services. And they have other goodies on top of that, eg. circuit  brakers, healthchecks, latency-based routing and more.
+My favorite is <a href="https://www.consul.io/">Consul</a> by Hashicorp. You set it up once and forget it&rsquo;s there.</p>
+<p>This is generally a topic you need to think along with the the</p>
+<h3 id="iac-and-composable-infrastructure-optional">IaC and composable infrastructure (optional)</h3>
+<p>With the number of services always increasing in your organization, it can quickly become common that new infrastructure to be required. Instead of manually scaling up infrastructure resources via your cloud provider&rsquo;s admin panel, why not follow the <em>Infrastructure as Code</em> principle?</p>
+<p>Imagine describing your infrastructure as code, with tools like eg. <a href="https://www.terraform.io">terraform</a> or <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a>. Changes would be stored in a git repository probably making it a source of truth, state can be centrally stored so that you can share it between multiple teams and GitOps will make your life a bit easier probably while trying to manage this whole mess.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>I really hope this could be useful for someone else other than me, writing down about my interests. Chances are, only a couple of friends will read it, but hey, Internet is about sharing knowledge so you never know. I&rsquo;d be happy to answer any questions you may have on Twitter/email - just shout me.</p>
+<p>Next articles will include more in-depth analysis of those parts and even code examples tog et you up and running.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://www.koslib.com/tags/microservices/">microservices</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/cloud/">cloud</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/deployments/">deployments</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/service-oriented-architecture/">service oriented architecture</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fwww.koslib.com%2fposts%2fmicroservices-101%2f&amp;text=You%20need%20to%20be%20this%20tall%20to%20do%20micro-services&amp;via=koslib" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.koslib.com%2fposts%2fmicroservices-101%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fwww.koslib.com%2fposts%2fmicroservices-101%2f&amp;title=You%20need%20to%20be%20this%20tall%20to%20do%20micro-services" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.koslib.com%2fposts%2fmicroservices-101%2f&amp;title=You%20need%20to%20be%20this%20tall%20to%20do%20micro-services" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.koslib.com%2fposts%2fmicroservices-101%2f&amp;title=You%20need%20to%20be%20this%20tall%20to%20do%20micro-services" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.koslib.com%2fposts%2fmicroservices-101%2f&amp;description=You%20need%20to%20be%20this%20tall%20to%20do%20micro-services" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.koslib.com/posts/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello, world!">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/koslibpro" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/koslib" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/username" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Konstantinos Livieratos
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://www.koslib.com">koslib</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.67.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://www.koslib.com/js/main.js"></script>
+<script src="https://www.koslib.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://www.koslib.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
