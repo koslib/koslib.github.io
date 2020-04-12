@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on koslib</title>
-    <link>https://wwww.koslib.com/posts/</link>
+    <link>https://www.koslib.com/posts/</link>
     <description>Recent content in Posts on koslib</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://wwww.koslib.com/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.koslib.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello, world!</title>
-      <link>https://wwww.koslib.com/posts/hello-world/</link>
+      <link>https://www.koslib.com/posts/hello-world/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://wwww.koslib.com/posts/hello-world/</guid>
+      <guid>https://www.koslib.com/posts/hello-world/</guid>
       <description>Yet another attempt to revive my blog and shed some light into stuff I&amp;rsquo;m working on and I personally find interesting. Consider this a personal challenge of myself to express in writing every day stuff that I do and attract my attention, and could potentially be professionally (or not) beneficial for others as well.
 In this blog I&amp;rsquo;ll be writing mostly about:
  Python and Go best-practises Microservices and my experiences with service oriented architectures AWS deployments Kubernetes deployments and one thing or two that I pick up on my way  Feel free to DM me on Twitter if you have a topic you&amp;rsquo;d like me to elaborate on, or hop on a brainstorming video chat, or generally just exchange ideas about technologies.</description>

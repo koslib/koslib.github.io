@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>koslib</title>
-    <link>https://wwww.koslib.com/</link>
+    <link>https://www.koslib.com/</link>
     <description>Recent content on koslib</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://wwww.koslib.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.koslib.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello, world!</title>
-      <link>https://wwww.koslib.com/posts/hello-world/</link>
+      <link>https://www.koslib.com/posts/hello-world/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://wwww.koslib.com/posts/hello-world/</guid>
+      <guid>https://www.koslib.com/posts/hello-world/</guid>
       <description>Yet another attempt to revive my blog and shed some light into stuff I&amp;rsquo;m working on and I personally find interesting. Consider this a personal challenge of myself to express in writing every day stuff that I do and attract my attention, and could potentially be professionally (or not) beneficial for others as well.
 In this blog I&amp;rsquo;ll be writing mostly about:
  Python and Go best-practises Microservices and my experiences with service oriented architectures AWS deployments Kubernetes deployments and one thing or two that I pick up on my way  Feel free to DM me on Twitter if you have a topic you&amp;rsquo;d like me to elaborate on, or hop on a brainstorming video chat, or generally just exchange ideas about technologies.</description>
@@ -24,10 +24,10 @@ In this blog I&amp;rsquo;ll be writing mostly about:
     
     <item>
       <title>whoami</title>
-      <link>https://wwww.koslib.com/page/about/</link>
+      <link>https://www.koslib.com/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://wwww.koslib.com/page/about/</guid>
+      <guid>https://www.koslib.com/page/about/</guid>
       <description>My name is Konstantinos Livieratos, just Kostas for short. Curious about everything by nature, software engineer by day and night.
 The most important things that sum myself up:
  Backend engineer at Detectify, at the Core Services Team Co-founder of Madinad, a premium advertising network. Currently advising Obsessed with Scandinavian design I speak mainly Python and Go Live in magnificent Stockholm, Sweden Huge believer of DevOps discipline My hands are dirty all day long with Kubernetes, containers and many similar things in between Certified AWS Solutions Architect, toying around with DigitalOcean too Sometimes I cook  What else do you need?</description>
