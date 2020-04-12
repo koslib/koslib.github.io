@@ -61,7 +61,7 @@ Some background About a decade back, I was an entry-level software engineer. I w
   "headline": "You need to be this tall to do micro-services",
   "description" : "Hello, is this thing on?\nAlright, now that we\x26rsquo;ve established that this is a place where I publicly write about my experiences, I thought it\x26rsquo;d be interesting to start with \x26ldquo;all the steps you need to do before you consider yourself doing micro-services the right way\x26rdquo;.\nSome background About a decade back, I was an entry-level software engineer. I was working alone on small projects, while I was breaking into all the new technologies.",
   "inLanguage" : "en",
-  "wordCount":  1722 ,
+  "wordCount":  1709 ,
   "datePublished" : "2020-04-12T00:00:00",
   "dateModified" : "2020-04-12T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -350,7 +350,6 @@ if (!doNotTrack) {
 <p>Your services will need to somehow communicate with each other. Find what&rsquo;s suitable for you. In a <code>docker-compose.yaml</code>-based setup, the integrated service discovery mechanism could be sufficient in a simple architecture. What if you have hybrid infrastructure spread out to a multi-region deployment or even combining different cloud providers?</p>
 <p>Service meshes have come into play lately. They are an abstraction layer for your networking needs that take care the communication between your services. And they have other goodies on top of that, eg. circuit  brakers, healthchecks, latency-based routing and more.
 My favorite is <a href="https://www.consul.io/">Consul</a> by Hashicorp. You set it up once and forget it even exists.</p>
-<p>This is generally a topic you need to think along with the the</p>
 <h3 id="iac-and-composable-infrastructure-optional">IaC and composable infrastructure (optional)</h3>
 <p>With the number of services always increasing in your organization, it can quickly become common that new infrastructure to be required. Instead of manually scaling up infrastructure resources via your cloud provider&rsquo;s admin panel, why not follow the <em>Infrastructure as Code</em> principle?</p>
 <p>Imagine describing your infrastructure as code, with tools like eg. <a href="https://www.terraform.io">terraform</a> or <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a>. Changes would be stored in a git repository probably making it a source of truth, state can be centrally stored so that you can share it between multiple teams and GitOps will make your life a bit easier probably while trying to manage this whole mess.</p>
