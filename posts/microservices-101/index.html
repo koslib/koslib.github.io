@@ -61,7 +61,7 @@ Some background About a decade back, I was an entry-level software engineer. I w
   "headline": "You need to be this tall to do micro-services",
   "description" : "Hello, is this thing on?\nAlright, now that we\x26rsquo;ve established that this is a place where I publicly write about my experiences, I thought it\x26rsquo;d be interesting to start with \x26ldquo;all the steps you need to do before you consider yourself doing micro-services the right way\x26rdquo;.\nSome background About a decade back, I was an entry-level software engineer. I was working alone on small projects, while I was breaking into all the new technologies.",
   "inLanguage" : "en",
-  "wordCount":  1709 ,
+  "wordCount":  1710 ,
   "datePublished" : "2020-04-12T00:00:00",
   "dateModified" : "2020-04-12T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -269,7 +269,7 @@ if (!doNotTrack) {
 <p>About a decade back, I was an entry-level software engineer.  I was working alone on small projects, while I was breaking into all the new technologies.  Containers were not a hot topic back then. I was deploying on VMs, using <a href="http://supervisord.org">supervisor</a>, <a href="http://www.fabfile.org/">fabric</a>, and provisioned infrastructure by hand (you know, doing button clicks on AWS dashboard). I&rsquo;m not even sure if micro-services where a concept at that point, but I have vague memories of SOA appearing in more and more tech articles.</p>
 <p>Fast forward in 2020, the tech stack I&rsquo;m working on is almost entirely different. Golang, Python, everything containerized - usually Kubernetized. Quite often in a microservices-based architecture, when the circumstances call for it.</p>
 <h4 id="todays-state">Today&rsquo;s state</h4>
-<p>Based on my professional experiences so far, I&rsquo;ve come to the understanding that there is a wide list of maestries you need think of, if you&rsquo;d like to deploy a full-blown micro-services based sophisticated system. And this may be confusing for newcomers to this space, or just entry-level software engineers who wonder how the heck tons of small components get wired up together and backend engineers can have  a hollistic overview of them.</p>
+<p>Based on my professional experiences so far, I&rsquo;ve come to the understanding that there is a wide list of maestries you need think of, if you&rsquo;d like to deploy a full-blown micro-services based sophisticated system. And this may be confusing for newcomers to this field, or just entry-level software engineers who wonder how the heck tons of small components get wired up together and backend engineers can have  a hollistic overview of them.</p>
 <p>So I compiled a list, of the most critical bits and pieces in the micro-services world.</p>
 <h3 id="are-you-sure">Are you sure?</h3>
 <p>Before you start building your new shiny product or chop off your monolith in micro-services, you  also need to evaluate the weaknesses to avoid some pitfalls. Micro-services come with</p>
@@ -288,7 +288,7 @@ if (!doNotTrack) {
 <p>Are you still up for the challenge? Read on.</p>
 <h3 id="cicd">CI/CD</h3>
 <p>First of all, you need to have a working CI/CD infrastructure, functioning like a well-oiled machine. If you don&rsquo;t, start investing ASAP in achieving that. <a href="https://docs.gitlab.com/ee/ci/">Gitlab</a> can help to that  and they have an interesting feature called <a href="https://docs.gitlab.com/ee/topics/autodevops/">Auto DevOps</a> for you who don&rsquo;t have dedicated ops teams to take care of it. That could be a very good starting point.</p>
-<p>Each service can and will have it&rsquo;s own CI pipeline. Adaptations may be necessary for some of them, but my suggested pipeline steps are:</p>
+<p>Each service can and will have its own CI pipeline. Adaptations may be necessary for some of them, but my suggested pipeline steps are:</p>
 <ul>
 <li>build</li>
 <li>test</li>
@@ -298,7 +298,7 @@ if (!doNotTrack) {
 <li>deploy</li>
 <li>cleanup</li>
 </ul>
-<p>MS Azure has <a href="https://docs.microsoft.com/en-us/azure/architecture/microservices/ci-cd">published</a> a fairly good article on this topic.</p>
+<p>MS Azure has published a fairly good <a href="https://docs.microsoft.com/en-us/azure/architecture/microservices/ci-cd">article</a> on this topic.</p>
 <p>Also, an easy to deploy and much beloved CI system is <a href="https://drone.io/">Drone</a>. The reason I love this is because you can easily create plugins with no specific structure, as they are spun up inside short-lived containers.</p>
 <h3 id="monitoring-and-observability">Monitoring and Observability</h3>
 <p>So many buzzwords here: grafana, prometheus, loki, ELK, influxDB, graphite, and much more.</p>
@@ -325,7 +325,7 @@ if (!doNotTrack) {
 <p>You will be surprised how much code will be shared between teams. Tools for logging and debugging. Service skeletons for setting up new database connections, manage application secrets, establish that RabbitMQ connection on the 2nd try because the 1st one failed. Apply exponential backoffs when rate limited by an external API. And much more.</p>
 <p>Get ready to invest a lot of time in designing and building internal tooling. Try to have your teams in sync. The core components can and many times should be shared.</p>
 <h3 id="testing--unit-api-integration">Testing  (unit, api, integration)</h3>
-<p>Many services means less time for manual e2e testing. Automate things and set them to fail early if needed (that&rsquo;s why you need a <a href="#cicd">working</a> CI/CD infrastructure).</p>
+<p>Many services means less time for manual e2e testing. Automate things and set them to fail early if needed (that&rsquo;s why you need a working <a href="#cicd">CI/CD infrastructure</a>).</p>
 <ul>
 <li>Test your models and create unit tests</li>
 <li>Test your functionality and mock stuff</li>
@@ -335,7 +335,7 @@ if (!doNotTrack) {
 <h3 id="apis-and-interfaces">APIs and interfaces</h3>
 <p>Services need to communicate between each other. Events messaging automatically comes to mind, with a message queue system (eg. <a href="https://www.rabbitmq.com/">RabbitMQ</a>, <a href="https://nats.io/">NATS</a>, etc). However, there are cases where syncronous responses will be needed based on your business requirements.</p>
 <p>Exposing good internal APIs is the first step here. Avoid re-using public APIs for internal use (or the opposite, which seems scary IMO). Implement drivers for your newly-created services, consuming the service&rsquo;s internal API but returning DTOs/data-models - take care of marshalling/unmarshalling as well.</p>
-<p>That  said, when desining for micro-services, you need to have a solid idea of contracts between your services, as the architecture depends on that.</p>
+<p>That  said, when designing for micro-services, you need to have a solid idea of contracts between your services, as the architecture depends on that.</p>
 <h3 id="scheduling-and-orchestration">Scheduling and orchestration</h3>
 <p>Alright, enough with hiding behind our finger. We&rsquo;re talking about <em>Docker containers</em> all this time.</p>
 <p>And when we&rsquo;re talking about Docker containers, we need to pick our path in terms of scheduler and orchestrator before shipping anything to production.</p>
@@ -351,11 +351,11 @@ if (!doNotTrack) {
 <p>Service meshes have come into play lately. They are an abstraction layer for your networking needs that take care the communication between your services. And they have other goodies on top of that, eg. circuit  brakers, healthchecks, latency-based routing and more.
 My favorite is <a href="https://www.consul.io/">Consul</a> by Hashicorp. You set it up once and forget it even exists.</p>
 <h3 id="iac-and-composable-infrastructure-optional">IaC and composable infrastructure (optional)</h3>
-<p>With the number of services always increasing in your organization, it can quickly become common that new infrastructure to be required. Instead of manually scaling up infrastructure resources via your cloud provider&rsquo;s admin panel, why not follow the <em>Infrastructure as Code</em> principle?</p>
+<p>With the number of services always increasing in your organization, it can quickly become common that new infrastructure is to be required. Instead of manually scaling up infrastructure resources via your cloud provider&rsquo;s admin panel, why not follow the <em>Infrastructure as Code</em> principle?</p>
 <p>Imagine describing your infrastructure as code, with tools like eg. <a href="https://www.terraform.io">terraform</a> or <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a>. Changes would be stored in a git repository probably making it a source of truth, state can be centrally stored so that you can share it between multiple teams and GitOps will make your life a bit easier probably while trying to manage this whole mess.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>I really hope this could be useful for someone else other than me, writing down about my interests. Chances are, only a couple of friends will read it, but hey, Internet is about sharing knowledge so you never know. I&rsquo;d be happy to answer any questions you may have on Twitter/email - just shout me.</p>
-<p>Next articles will include more in-depth analysis of those parts and even code examples tog et you up and running.</p>
+<p>Next articles will include more in-depth analysis of those parts and even code examples to get you up and running.</p>
 
 
         
