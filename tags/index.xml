@@ -6,10 +6,46 @@
     <description>Recent content in Tags on koslib</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.koslib.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>anti-patterns</title>
+      <link>https://www.koslib.com/tags/anti-patterns/</link>
+      <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/tags/anti-patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apis</title>
+      <link>https://www.koslib.com/tags/apis/</link>
+      <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/tags/apis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>microservices</title>
+      <link>https://www.koslib.com/tags/microservices/</link>
+      <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/tags/microservices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>service oriented architecture</title>
+      <link>https://www.koslib.com/tags/service-oriented-architecture/</link>
+      <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/tags/service-oriented-architecture/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>cloud</title>
@@ -26,24 +62,6 @@
       <pubDate>Sun, 12 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.koslib.com/tags/deployments/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>microservices</title>
-      <link>https://www.koslib.com/tags/microservices/</link>
-      <pubDate>Sun, 12 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.koslib.com/tags/microservices/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>service oriented architecture</title>
-      <link>https://www.koslib.com/tags/service-oriented-architecture/</link>
-      <pubDate>Sun, 12 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.koslib.com/tags/service-oriented-architecture/</guid>
       <description></description>
     </item>
     

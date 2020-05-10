@@ -3,37 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.koslib.com/posts/entity-services-anti-pattern/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/tags/anti-patterns/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/tags/apis/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/tags/microservices/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/posts/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/tags/service-oriented-architecture/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.koslib.com/tags/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.koslib.com/tags/cloud/</loc>
     <lastmod>2020-04-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.koslib.com/tags/deployments/</loc>
-    <lastmod>2020-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.koslib.com/</loc>
-    <lastmod>2020-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.koslib.com/tags/microservices/</loc>
-    <lastmod>2020-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.koslib.com/posts/</loc>
-    <lastmod>2020-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.koslib.com/tags/service-oriented-architecture/</loc>
-    <lastmod>2020-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.koslib.com/tags/</loc>
     <lastmod>2020-04-12T00:00:00+00:00</lastmod>
   </url>
   

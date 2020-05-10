@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>service oriented architecture on koslib</title>
-    <link>https://www.koslib.com/tags/service-oriented-architecture/</link>
-    <description>Recent content in service oriented architecture on koslib</description>
+    <title>anti-patterns on koslib</title>
+    <link>https://www.koslib.com/tags/anti-patterns/</link>
+    <description>Recent content in anti-patterns on koslib</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://www.koslib.com/tags/service-oriented-architecture/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.koslib.com/tags/anti-patterns/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,17 +21,6 @@
 People coming from Java background most of the time go for a software design comprised of entity services. Spring even has a tutorial about creating entity services. Microsoft does too. That nearly explains why, I presume.
 In this post, I will explain my view on this anti-pattern.
 Backgound Once upon a time, there was a huge monolith. It started as a great initiative and helped the dev team release features easily and, frankly, quite fast especially in the beginning.</description>
-    </item>
-    
-    <item>
-      <title>You need to be this tall to do micro-services</title>
-      <link>https://www.koslib.com/posts/microservices-101/</link>
-      <pubDate>Sun, 12 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.koslib.com/posts/microservices-101/</guid>
-      <description>Hello, is this thing on?
-Alright, now that we&amp;rsquo;ve established that this is a place where I publicly write about my experiences, I thought it&amp;rsquo;d be interesting to start with &amp;ldquo;all the steps you need to do before you consider yourself doing micro-services the right way&amp;rdquo;.
-Some background About a decade back, I was an entry-level software engineer. I was working alone on small projects, while I was breaking into all the new technologies.</description>
     </item>
     
   </channel>
