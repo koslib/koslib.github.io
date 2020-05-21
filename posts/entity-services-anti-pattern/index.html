@@ -62,7 +62,7 @@ Backgound Once upon a time, there was a huge monolith. It started as a great ini
   "headline": "A simplistic explanation of the entity services anti-pattern",
   "description" : "Lately, I\x26rsquo;ve been participating in discussions where microservices patterns are the hottest topic.\nPeople coming from Java background most of the time go for a software design comprised of entity services. Spring even has a tutorial about creating entity services. Microsoft does too. That nearly explains why, I presume.\nIn this post, I will explain my view on this anti-pattern.\nBackgound Once upon a time, there was a huge monolith. It started as a great initiative and helped the dev team release features easily and, frankly, quite fast especially in the beginning.",
   "inLanguage" : "en",
-  "wordCount":  611 ,
+  "wordCount":  979 ,
   "datePublished" : "2020-05-10T00:00:00",
   "dateModified" : "2020-05-10T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -279,8 +279,9 @@ if (!doNotTrack) {
 <li><code>cart service</code>, which would be responsible for assembling an order and let the customer proceed to checkout</li>
 </ul>
 <p>The cart service would need to fetch information from the products service (eg. to get the product prices), therefore, we&rsquo;ve introduced coupling between those two. But the entire point of microservices is to <strong>reduce coupling</strong> and <strong>increase autonomy</strong> between the various service, so these two <strong>contradict eachother</strong>.</p>
-<h3 id="the-alternative">The alternative</h3>
-<p>However, we don&rsquo;t need <em>all</em> of the information that can be found in the products service DB in order to compile a cart and eventually an order. We only need just a few - the product name, the price, the  stock of it and probabbly a couple of others, but definitely not all of them.</p>
+<p>We don&rsquo;t need <em>all</em> of the information that can be found in the products service DB in order to compile a cart and eventually an order. We only need just a few - the product name, the price, the  stock of it and probabbly a couple of others, but definitely not all of them.</p>
+<h3 id="the-alternatives">The alternatives</h3>
+<h4 id="1-true-db-independence">1. True DB independence</h4>
 <p>From a high-level view, a viable alternative is to build a <strong>truly independent service DB</strong>. For example, the cart service DB can only keep the product information that is relevant for it, along with all the details it will keep anyway for the cart objects themselves.</p>
 <p>That is a simplistic approach of how this would look like:</p>
 <ol>
@@ -290,8 +291,24 @@ if (!doNotTrack) {
 </ol>
 <p>This will <strong>reduce the coupling</strong> between services and eventually lead to a <strong>message-based architecture</strong>.</p>
 <p>What could be a challenge in this approach is the introduction of a new service in the system. If by eg. we had to introduce the <code>cart service</code> long after the <code>products service</code> was live, that would pose an interesting problem to solve.</p>
-<p>An idea here would be to structure a repeatable way to do <strong>data backfilling</strong> for operations like this. I&rsquo;ll gather some thoughts on this one at a future blog post.</p>
-<p>Have a different approach to recommend? I&rsquo;d love to learn more about it!</p>
+<p>An idea here would be to structure a repeatable way to do <strong>data backfilling</strong> for operations like this. I&rsquo;ll gather some thoughts on this one at a future blog post - maybe.</p>
+<h4 id="2-saga-pattern">2. SAGA pattern</h4>
+<p>It could be practical in complex environments that DB independence is not a realistic option to follow the SAGA services pattern. In this case, each distributed transaction would be  executed inside a saga. A saga is a sequence of local transactions.</p>
+<p>As an example, the saga would a) execute a <strong>local transaction</strong> inside <em>serviceA</em> and then b) <strong>trigger an event/message</strong> that would be consumed by <em>serviceB</em>. And that would be repeated until the resulting context was compelte.</p>
+<p>However, not everything is filled with roses in this road. The software model becomes significantly more complex. Also, because of the combo &ldquo;local transaction / publish event&rdquo; in every step of the process, there is a reliability risk involved, which needs to be addressed at the architecturing phase.</p>
+<h4 id="3-event-sourcing">3. Event sourcing</h4>
+<p>Event sourcing is about persisting in a shared &ldquo;event store&rdquo; the state of all business entities. Eg. customers or carts are a set of state-changing events. A new event is generated whenever a state-changing action is made. Each entity is then comprised as a set of events accumulated together to form an actual object. The shared store has an API to publish events in it as well as subscribing a service to consuming certain events.</p>
+<p>In our previous example, the a cart instance (eg. <code>cart ID1234</code>), would be comprised as a set of events:</p>
+<ol>
+<li>item1 added</li>
+<li>item2 added</li>
+<li>promo code1 applied</li>
+<li>sent to checkout</li>
+</ol>
+<p>In this approach, it can become challenging to fetch events with a high frequency especially as you scale. Thus it is common to periodically store snapshots of objects. In case someone attempts to retrieve an object, the event store finds the latest snapshot and queries for the events added further on from the snapshot&rsquo;s timestamp.</p>
+<p>To wrap this up, be careful before opting in for this methodology. Steep learning curve is ahead, especially if you haven&rsquo;t used it ever before. Also complicates a bit the software model, but, well, trade-offs ¯_(ツ)_/¯.</p>
+<h3 id="epilogue">Epilogue</h3>
+<p>If you ask my personal favorite, I do not have an honest answer. Probably database independence is what I&rsquo;d prefer in most use-cases, although there are drawbacks to consider and it heavily depends on the use-case. Have a different approach to recommend? I&rsquo;d love to learn more about it!</p>
 
 
         
