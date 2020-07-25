@@ -6,10 +6,20 @@
     <description>Recent content in Posts on koslib</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.koslib.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Deploy apps on Kubernetes with GitHub Actions - from start to finish</title>
+      <link>https://www.koslib.com/posts/deploy-k8s-apps-helm-complete/</link>
+      <pubDate>Sat, 25 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/posts/deploy-k8s-apps-helm-complete/</guid>
+      <description>After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.
+Then I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.</description>
+    </item>
     
     <item>
       <title>A simplistic explanation of the entity services anti-pattern</title>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on koslib</title>
+    <link>https://www.koslib.com/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on koslib</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.koslib.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Deploy apps on Kubernetes with GitHub Actions - from start to finish</title>
+      <link>https://www.koslib.com/posts/deploy-k8s-apps-helm-complete/</link>
+      <pubDate>Sat, 25 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/posts/deploy-k8s-apps-helm-complete/</guid>
+      <description>After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.
+Then I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.</description>
+    </item>
+    
+  </channel>
+</rss>

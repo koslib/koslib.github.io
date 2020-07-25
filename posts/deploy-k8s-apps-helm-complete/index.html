@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Deploy apps on Kubernetes with GitHub Actions - from start to finish - koslib</title>
+  <meta name="description" content="After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.
+Then I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.">
+  <meta name="author" content="Konstantinos Livieratos"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "koslib",
+    
+    "url": "https:\/\/www.koslib.com"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.koslib.com"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/www.koslib.com",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/www.koslib.com\/posts\/deploy-k8s-apps-helm-complete\/",
+          "name": "Deploy apps on kubernetes with git hub actions from start to finish"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Konstantinos Livieratos"
+  },
+  "headline": "Deploy apps on Kubernetes with GitHub Actions - from start to finish",
+  "description" : "After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.\nThen I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.",
+  "inLanguage" : "en",
+  "wordCount":  2375 ,
+  "datePublished" : "2020-07-25T00:00:00",
+  "dateModified" : "2020-07-25T00:00:00",
+  "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
+  "keywords" : [ "kubernetes, aws eks, k8s, helm, github actions, helm secrets" ],
+  "mainEntityOfPage" : "https:\/\/www.koslib.com\/posts\/deploy-k8s-apps-helm-complete\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/www.koslib.com",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Deploy apps on Kubernetes with GitHub Actions - from start to finish" />
+<meta property="og:description" content="After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.
+Then I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.">
+<meta property="og:image" content="https://www.koslib.com/img/me_rect.jpg" />
+<meta property="og:url" content="https://www.koslib.com/posts/deploy-k8s-apps-helm-complete/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="koslib" />
+
+  <meta name="twitter:title" content="Deploy apps on Kubernetes with GitHub Actions - from start to finish" />
+  <meta name="twitter:description" content="After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as …">
+  <meta name="twitter:image" content="https://www.koslib.com/img/me_rect.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@koslib" />
+  <meta name="twitter:creator" content="@koslib" />
+  <link href='https://www.koslib.com/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="alternate" href="https://www.koslib.com/index.xml" type="application/rss+xml" title="koslib"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://www.koslib.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://www.koslib.com/css/highlight.min.css" /><link rel="stylesheet" href="https://www.koslib.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163448837-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://www.koslib.com">koslib</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="koslib" href="https://www.koslib.com">
+            <img class="avatar-img" src="https://www.koslib.com/img/me_rect.jpg" alt="koslib" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Deploy apps on Kubernetes with GitHub Actions - from start to finish</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on <a href="https://aws.amazon.com/eks/">AWS EKS</a>, but make it as automated as possible in every aspect.</p>
+<p>Then I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.</p>
+<h2 id="background-and-topics">Background and topics</h2>
+<p>Most articles and guides cover only a small part of the CI/CD process. Some focus on the Github Actions part, others on a few parts of the app-kubernetization process and so on. The idea is to give someone with at least a basic idea of the kubernetes world a high level overview of the process as well as enough realistic examples to help them get started with it.</p>
+<p>Therefore I will cover the following:</p>
+<ol>
+<li>Kubernetize an app, using Helm</li>
+<li>Spin up your K8S cluster with AWS EKS</li>
+<li>Configure your CI/CD process with Github Actions</li>
+<li>Environment variables</li>
+<li>Secrets</li>
+</ol>
+<p>There are some assumptions in this guide, and of course I am describing only my experience out here, so you may find some parts of the post oppinionated. This does not mean that this post only contains the single correct way to do things. I myself tend to forget long and sophisticated processes like this, so I tried to generalize things as much as possible, and hopefully will contribute to less hours of heads exploding to fellows around the world.</p>
+<p>So, let&rsquo;s start!</p>
+<h2 id="the-complete-guide">The complete guide</h2>
+<p>As I mentioned before, there are some assumptions in this guide. Heads up about them:</p>
+<ul>
+<li>I use AWS in general, and I&rsquo;d love to let AWS manage my Kubernetes cluster through their EKS service</li>
+<li>EKSCTL to the rescue</li>
+<li>As I am on AWS already, I&rsquo;d use KMS to encrypt stuff and generate secrets</li>
+<li>I found the existing options of authenticating and executing commands on an EKS cluster cumbersome, so I made my own GA for this</li>
+<li>In my use-case, Kubernetes made sense. Please, please, please make sure your also need it otherwise you will shoot yourself in the foot.</li>
+</ul>
+<h3 id="prepare-your-app">Prepare your app</h3>
+<p>If you have made it this far, it would be safe to assume that you already have a Dockerized app. Programming language does not really matter, but for the sake of it, I used Python and Go while following those steps. Also, I will assume you already have a remote Docker registry.</p>
+<p>In order to deploy your app in Kubernetes, you need to have a few basic YAML manifest files: <code>deployment.yaml</code> and <code>service.yaml</code>.</p>
+<blockquote>
+<p>Super quick notes<br>
+A <strong>deployment</strong> allows you to describe an application&rsquo;s life cycle, such as which images to use for the app, the number of pods there should be, and the way in which they should be updated. (1)<br>
+A <strong>service</strong> provides an abstract way to expose an application running on a set of Pods as a network service.(2)</p>
+</blockquote>
+<h4 id="deploy-with-yaml-files">Deploy with yaml files</h4>
+<p>After consulting the official Kubernetes <a href="https://kubernetes.io/docs/home/">docs</a> you could start writing them down. Even applying them on a potential local k8s deployment with <code>kubectl apply -f deployment.yaml</code> for example would show some hopeful first results. And, of course, you&rsquo;d move on creating other important resource object files like <code>ingress.yaml</code>, <code>hpa.yaml</code> etc.</p>
+<p>But if you are like me, and have a handful of different apps and services or side-projects to work on, you&rsquo;d find this repetitive process tedious. There comes <a href="https://helm.sh/">Helm</a>. Helm is a package manager for Kubernetes apps. It is written in Go and leverages Go templates.</p>
+<p>I&rsquo;ve found that it can be used either as a package/version manager for an app or as a mainly templating tool for your kubernetes manifest files. Each Helm &ldquo;app&rdquo; is called <em>chart</em>, and it is a collection of <code>*.yaml</code> templates which describe a set of resources: <code>deployment.yaml, service.yaml, ingress.yaml, hpa.yaml, secrets.yaml</code>.</p>
+<p>In my case, after looking around on Github for an existing helm chart to cover my needs, I was dissapointed enough to decide to roll out my own. And to be honest, Helm makes it fairly easy given their incredible docs. And that it how I ended up creating a <a href="https://github.com/koslibpro/helm-servicetemplate">service template chart</a> with the following structure:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">- templates/
+    -- _helpers.tpl
+    -- deployment.yaml
+    -- hpa.yaml
+    -- ingress.yaml
+    -- secrets.yaml
+    -- service.yaml
+    -- serviceaccount.yaml
+- Chart.yaml
+- values.yaml
+</code></pre></div><p>Feel free to take a look inside. You will quickly understand that it is nothing extraordinary, and certainly not something very much different from the initial set of files that  <code>helm create mychart</code> produces, yet with adjustments to make it more usage-ready. The main differences are: 1) secrets support, 2) environment variables in containers - minor stuff.</p>
+<h4 id="deploy-with-helm">Deploy with helm</h4>
+<p>I&rsquo;ve taken the extra step and created a remote chart repo using another great Github feature, Github Pages and <a href="https://www.koslib.com/mycharts/">published</a> my service template chart.</p>
+<p>Deploying using Helm is as easy as <code>helm install &lt;release name&gt; &lt;remote or local path to chart&gt; -f &lt;path to custom values file&gt;</code>. Therefore if you&rsquo;d like to use my own provided service chart you can do:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">helm upgrade --install myrelease http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml
+</code></pre></div><h3 id="your-aws-eks-cluster">Your AWS EKS cluster</h3>
+<p>Why bother rolling out your own cluster and carry the burden of maintaining, securing and keeping it alive, while you can have a managed Kubernetes cluster by a large-scale cloud provider? AWS offers <a href="https://aws.amazon.com/eks/">EKS</a>, DigitalOcean offers <a href="https://www.digitalocean.com/products/kubernetes/">DOKS</a>, Azure offers <a href="https://azure.microsoft.com/en-us/services/kubernetes-service/">AKS</a>, and so on.</p>
+<p>As an AWS user myself, I opted to use EKS. I&rsquo;d recommend instead of using the AWS UI and create your cluster via clicking, use <a href="https://eksctl.io/">eksctl</a>, which is the official CLI for EKS. Follow the docs there as well, and you will end up with a <code>cluster.yaml</code> file which describes the desired attributes of your cluster.</p>
+<p>Now, some high level instructions in order to configure your cluster to gather metrics, provide a dashboard for UI lovers and expose an endpoint for eventually-to-be-deployed services  on it:</p>
+<ol>
+<li>Create an EKS cluster with <code>eksctl</code> and a custom <code>cluster.yaml</code> configuration.</li>
+<li>When the cluster is created, install the metrics server</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
+</code></pre></div><p>and verify it&rsquo;s running (you should see one replica running there).</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl get deployment metrics-server -n kube-system
+</code></pre></div><ol start="3">
+<li>Deploy the dashboard</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+</code></pre></div><ol start="4">
+<li>Create an <code>eks-admin</code> service account and cluster role binding, using t custom <code>eks-admin-service-account.yaml</code></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eks-admin
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: eks-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: eks-admin
+  namespace: kube-system
+</code></pre></div><ol start="5">
+<li>Retrieve a token</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk &#39;{print $1}&#39;)
+</code></pre></div><p>and you can use it on the dashboard after proxying with <code>kubectl proxy</code>, by going here: <code>http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login</code>.</p>
+<ol start="6">
+<li>
+<p>Install nginx ingress controller using a NetworkLoadBalancer (<a href="https://aws.amazon.com/blogs/opensource/network-load-balancer-nginx-ingress-controller-eks/">instructions and info</a>).</p>
+</li>
+<li>
+<p>Follow <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm#step-4-%E2%80%94-securing-the-ingress-using-cert-manager">these</a>  DO&rsquo;s instructions for cert-manager support in <code>Ingress</code> resources. This is very helpful in order to automatically issue SSL certificates for your services&rsquo; endpoints.
+s</p>
+</li>
+<li>
+<p>Allow EKS nodes to pull ECR images: <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_on_EKS.html">https://docs.aws.amazon.com/AmazonECR/latest/userguide/ECR_on_EKS.html</a></p>
+</li>
+</ol>
+<p>Should everything go well, you will have a fully functioning EKS cluster, where you&rsquo;d be able to browse and connect on the  dashboard, have the nginx ingress controller ready to expose your new services to the outer world and, last but not least, your nodes can pull Docker images from <a href="https://aws.amazon.com/ecr/">ECR</a>.</p>
+<h3 id="configuring-your-cicd---automation">Configuring your CI/CD - Automation</h3>
+<p>In this blog post, Github Actions is the selected CI/CD automation tool. In order to keep things within scope, I will briefly describe the idea of the workflow and then also provide a working example for you to copy and use as you wish.</p>
+<p>The process looks like this, as in any CI/CD system:</p>
+<ol>
+<li>Checkout your code</li>
+<li>Build your Docker image after running your tests</li>
+<li>Push image to Docker registry</li>
+<li>Authenticate the CI/CD system  with the k8s cluster</li>
+<li>Deploy a new version of the app with Helm</li>
+<li>Cleanup</li>
+</ol>
+<p>In step #4, I talked about authentication with the kubernetes cluster. Practically this means that the Github Action runner will need to be able to execute <code>kubectl</code>/<code>helm</code> commands inside our EKS cluster. If you followed the instructions from this post, you should have created the EKS cluster using <code>eksctl</code> tool, which appends the auth details to your new EKS cluster in your kube config file on your computer. However, this uses <code>aws-iam-authenticator</code>, a small tool which is used to securely authenticate with AWS resources.</p>
+<p>Again, with a brief look in the GA marketplace, I was not able to find an existing GA which would 1) authenticate on EKS with <code>aws-iam-authenticator</code> given the kubeconfig file and 2) execute helm commands. So, I rolled out my own dead-simple action which does exactly that: <a href="https://github.com/koslibpro/helm-eks-action">https://github.com/koslibpro/helm-eks-action</a>. You may feel free to use/extend it. The only thing you need to do is create a Github Secret in your project repository, named <code>KUBE_CONFIG_DATA</code>  and add in the value of that secret your kube config file in base64-encrypted form.</p>
+<p>A fully working example of a <code>.github/workflow/main.yml</code> follows below:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+env:
+  DOCKER_IMAGE: # fill this in
+  REGISTRY_REPO_NAME: # fill this in
+  AWS_REGION: us-east-1 # change as needed
+  EKS_CLUSTER_NAME: # fill this in
+  K8S_DEPLOYMENT: # fill this in
+  K8S_NAMESPACE: default # change as needed
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called &#34;build&#34;
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    - name: AWS ECR
+      uses: kciter/aws-ecr-action@v1
+      with:
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        repo: # fill this in
+        region: us-east-1  # change as needed
+        tags: ${{ github.sha }}
+        create_repo: true
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # change as needed
+
+      - name: helm deploy
+        uses: koslibpro/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          command: helm upgrade --install myrelease http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml --set image.tag=${{ github.sha }} --wait
+
+</code></pre></div><p>As you can see, there are a few AWS Account-related secrets to create on Github Secrets, and of course you will need to adapt your <code>helm install/upgrade</code> command as needed, but I&rsquo;m sure you have a grasp of the concept. Consider this as a guideline, so of course adapt accordingly.</p>
+<h3 id="environment-variables-and-secrets">Environment variables and secrets</h3>
+<h4 id="non-sensitive-information">Non sensitive information</h4>
+<p>Our good old env vars, every software enginees knows about them and nobody can live without them. Back in the day, env vars would contain anything. From app configuration flags used on startup to database connection strings.</p>
+<p>In the containers world, we, thank God, opted for not storing sensitive information as plain text in the environment variables. And that is the notion of <em>secrets</em>.</p>
+<p>In kuberrnetes, there is a way to define the env variables of a container with a pretty neat way. Also, if you go down this road using my service template chart I referrenced above, you can just add a key-value set inside the <code>.values.yaml</code> file you create for your repository, and those will be exposed as env vars.</p>
+<p>Example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># .values.yaml
+....
+
+env:
+    foo:bar
+    foo2:bar2
+    ...
+</code></pre></div><h4 id="sensitive-information">Sensitive information</h4>
+<p>What about the secrets though? How would you safely commit sensitive info inside your codebase, so that  GA could pick them up and add them as kubernetes secrets in your cluster, so that your containers could fetch and read them up later on?</p>
+<p><a href="https://github.com/zendesk/helm-secrets">Helm secrets</a> can help! Helm secrets is a plugin developed and maintained by Zendesk, which helps with encrypting/descrypting secrets while executing <code>helm install/upgrade</code> commands. Under the hood, it uses <a href="https://github.com/mozilla/sops">mozilla sops</a> to encrypt keys you provide, and you can use a managed key service to encrypt your sensitive info.</p>
+<p>Briefly talking, the concept is to create a <code>secrets.yaml</code> file which would contain your sensitive info in plain text, <strong>initially</strong>. Example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">secrets:
+    DATABASE_URL: postgres://username:password@host:port/db
+</code></pre></div><p>By adding a <code>.sops.yaml</code> file at the root path of your folder, you can define which keys sops will use to encrypt your secrets. Eg. in my case with AWS KMS:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">creation_rules:
+  # Encrypt with AWS KMS
+  - kms: &#39;arn:aws:kms:&lt;region&gt;:&lt;account_id&gt;:key/&lt;id&gt;&#39;
+</code></pre></div><p>And then using <code>helm secrets enc .secrets.yaml</code>, you will encrypt the content! Open up the file now, and confirm that this has worked out correctly for you as well. Also, more info on how sops works can be found <a href="https://github.com/mozilla/sops">here</a>. Not to forget, the <code>.secrets.yaml</code> file, after it&rsquo;s encrypted can be safely committed into your git repository.</p>
+<p>That is exactly why in my service template chart before I extended the default version of it to include <code>Secrets</code>. Because now, by installing/upgrading a helm release and providing the <em>encrypted</em> <code>secrets.yaml</code> file as a file param, helm will create the secrets on kubernetes for your service, and will also expose them to your containers in a safe manner to be consumed.</p>
+<h3 id="glueing-everything-together">Glueing everything together</h3>
+<p>I&rsquo;m glad you made it this far, and really appreciate it!</p>
+<p>As of now, you should have the following:</p>
+<ol>
+<li>Your EKS cluster using eksctl</li>
+<li><code>.values.yaml</code> adjusted according to your needs and <code>.secrets.yaml</code> containing your encrypted sensitive info in your git repository</li>
+<li>A GitHub Action workflow set up in your repository</li>
+</ol>
+<p>The last adjustment we need to do in order to have a fully working and functional CI/CD workflow is to make our GA helm release command include the secrets file. You can easily do it like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">with:
+    command: |
+    helm upgrade --install &lt;release&gt; http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml -f .secrets.yaml  --set image.tag=${{ github.sha }} --wait
+</code></pre></div><h3 id="conclusion">Conclusion</h3>
+<p>I understand that this article may be demanding for more junior software engineers, however it attempts to sum up the process, end to end, on how one can use Github Actions to deploy apps with Helm on a Kubernetes cluster. Hopefully people found it useful, but I&rsquo;d be more than happy to receive feedback and commends on how to improve and make this process more efficient/better!</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://www.redhat.com/en/topics/containers/what-is-kubernetes-deployment">https://www.redhat.com/en/topics/containers/what-is-kubernetes-deployment</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/service/">https://kubernetes.io/docs/concepts/services-networking/service/</a></li>
+</ol>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://www.koslib.com/tags/kubernetes/">kubernetes</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/aws-eks/">aws eks</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/k8s/">k8s</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/helm/">helm</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/github-actions/">github actions</a>&nbsp;
+            
+              <a href="https://www.koslib.com/tags/helm-secrets/">helm secrets</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fwww.koslib.com%2fposts%2fdeploy-k8s-apps-helm-complete%2f&amp;text=Deploy%20apps%20on%20Kubernetes%20with%20GitHub%20Actions%20-%20from%20start%20to%20finish&amp;via=koslib" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.koslib.com%2fposts%2fdeploy-k8s-apps-helm-complete%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fwww.koslib.com%2fposts%2fdeploy-k8s-apps-helm-complete%2f&amp;title=Deploy%20apps%20on%20Kubernetes%20with%20GitHub%20Actions%20-%20from%20start%20to%20finish" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.koslib.com%2fposts%2fdeploy-k8s-apps-helm-complete%2f&amp;title=Deploy%20apps%20on%20Kubernetes%20with%20GitHub%20Actions%20-%20from%20start%20to%20finish" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.koslib.com%2fposts%2fdeploy-k8s-apps-helm-complete%2f&amp;title=Deploy%20apps%20on%20Kubernetes%20with%20GitHub%20Actions%20-%20from%20start%20to%20finish" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.koslib.com%2fposts%2fdeploy-k8s-apps-helm-complete%2f&amp;description=Deploy%20apps%20on%20Kubernetes%20with%20GitHub%20Actions%20-%20from%20start%20to%20finish" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://www.koslib.com/posts/entity-services-anti-pattern/" data-toggle="tooltip" data-placement="top" title="A simplistic explanation of the entity services anti-pattern">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://www.koslib.com/posts/deploy-k8s-apps-helm-complete">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/www.koslib.com\/posts\/deploy-k8s-apps-helm-complete';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/koslibpro" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/koslib" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/konstantinoslivieratos" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Konstantinos Livieratos
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://www.koslib.com">koslib</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.71.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://www.koslib.com/js/main.js"></script>
+<script src="https://www.koslib.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://www.koslib.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'koslib';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//koslib.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
