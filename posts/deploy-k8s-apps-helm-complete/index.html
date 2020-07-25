@@ -60,7 +60,7 @@ Then I quickly realized that no good complete tutorials, or at least people talk
   "headline": "Deploy apps on Kubernetes with GitHub Actions - from start to finish",
   "description" : "After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.\nThen I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.",
   "inLanguage" : "en",
-  "wordCount":  2372 ,
+  "wordCount":  2373 ,
   "datePublished" : "2020-07-25T00:00:00",
   "dateModified" : "2020-07-25T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -481,7 +481,7 @@ env:
 <p>The last adjustment we need to do in order to have a fully working and functional CI/CD workflow is to make our GA helm release command include the secrets file. You can easily do it like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">with:
     command: |
-    helm upgrade --install &lt;release&gt; http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml -f .secrets.yaml  --set image.tag=${{ github.sha }} --wait
+    helm secrets upgrade --install &lt;release&gt; http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml -f .secrets.yaml  --set image.tag=${{ github.sha }} --wait
 </code></pre></div><h3 id="conclusion">Conclusion</h3>
 <p>I understand that this article may be demanding for more junior software engineers, however it attempts to sum up the process, end to end, on how one can use Github Actions to deploy apps with Helm on a Kubernetes cluster. Hopefully people found it useful, but I&rsquo;d be more than happy to receive feedback and comments on how to improve and make this process more efficient/better!</p>
 <h2 id="references">References</h2>
