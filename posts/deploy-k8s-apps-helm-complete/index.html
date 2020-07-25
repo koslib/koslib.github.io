@@ -469,7 +469,7 @@ env:
   # Encrypt with AWS KMS
   - kms: &#39;arn:aws:kms:&lt;region&gt;:&lt;account_id&gt;:key/&lt;id&gt;&#39;
 </code></pre></div><p>And then using <code>helm secrets enc .secrets.yaml</code>, you will encrypt the content! Open up the file now, and confirm that this has worked out correctly for you as well. Also, more info on how sops works can be found <a href="https://github.com/mozilla/sops">here</a>. Not to forget, the <code>.secrets.yaml</code> file, after it&rsquo;s encry  pted can be safely committed into your git repository.</p>
-<p>That is exactly why in my service template chart before I extended the default version of it to include <code>Secrets</code>. Because now, by installing/upgrading a helm release and providing the <em>encrypted</em> <code>secrets.yaml</code> file as a file param, helm will create the secrets on kubernetes for your service, and will also expose them to your containers in a safe manner to be consumed.</p>
+<p>That is exactly why in my service template Helm chart I extended the default-generated version of it to include <code>Secrets</code>/<code>secrets.yaml</code>. Because now, by installing/upgrading a helm release and providing the <em>encrypted</em> <code>secrets.yaml</code> file as a file param, helm will create the secrets on kubernetes for your service, and will also expose them to your containers in a safe manner to be consumed.</p>
 <h3 id="glueing-everything-together">Glueing everything together</h3>
 <p>I&rsquo;m glad you made it this far, and really appreciate it!</p>
 <p>As of now, you should have the following:</p>
@@ -483,7 +483,7 @@ env:
     command: |
     helm upgrade --install &lt;release&gt; http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml -f .secrets.yaml  --set image.tag=${{ github.sha }} --wait
 </code></pre></div><h3 id="conclusion">Conclusion</h3>
-<p>I understand that this article may be demanding for more junior software engineers, however it attempts to sum up the process, end to end, on how one can use Github Actions to deploy apps with Helm on a Kubernetes cluster. Hopefully people found it useful, but I&rsquo;d be more than happy to receive feedback and commends on how to improve and make this process more efficient/better!</p>
+<p>I understand that this article may be demanding for more junior software engineers, however it attempts to sum up the process, end to end, on how one can use Github Actions to deploy apps with Helm on a Kubernetes cluster. Hopefully people found it useful, but I&rsquo;d be more than happy to receive feedback and comments on how to improve and make this process more efficient/better!</p>
 <h2 id="references">References</h2>
 <ol>
 <li><a href="https://www.redhat.com/en/topics/containers/what-is-kubernetes-deployment">https://www.redhat.com/en/topics/containers/what-is-kubernetes-deployment</a></li>
