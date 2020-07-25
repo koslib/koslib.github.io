@@ -60,7 +60,7 @@ Then I quickly realized that no good complete tutorials, or at least people talk
   "headline": "Deploy apps on Kubernetes with GitHub Actions - from start to finish",
   "description" : "After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.\nThen I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.",
   "inLanguage" : "en",
-  "wordCount":  2375 ,
+  "wordCount":  2372 ,
   "datePublished" : "2020-07-25T00:00:00",
   "dateModified" : "2020-07-25T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -272,7 +272,7 @@ if (!doNotTrack) {
 <li>Environment variables</li>
 <li>Secrets</li>
 </ol>
-<p>There are some assumptions in this guide, and of course I am describing only my experience out here, so you may find some parts of the post oppinionated. This does not mean that this post only contains the single correct way to do things. I myself tend to forget long and sophisticated processes like this, so I tried to generalize things as much as possible, and hopefully will contribute to less hours of heads exploding to fellows around the world.</p>
+<p>There are some assumptions in this guide, and of course I am describing only my experience out here, so you may find some parts of the post oppinionated. This does not mean that this post only contains the single correct way to do things. I myself tend to forget long and sophisticated processes like this, so I tried to generalize things as much as possible, and hopefully it can serve as a point of reference for this process.</p>
 <p>So, let&rsquo;s start!</p>
 <h2 id="the-complete-guide">The complete guide</h2>
 <p>As I mentioned before, there are some assumptions in this guide. Heads up about them:</p>
@@ -281,7 +281,7 @@ if (!doNotTrack) {
 <li>EKSCTL to the rescue</li>
 <li>As I am on AWS already, I&rsquo;d use KMS to encrypt stuff and generate secrets</li>
 <li>I found the existing options of authenticating and executing commands on an EKS cluster cumbersome, so I made my own GA for this</li>
-<li>In my use-case, Kubernetes made sense. Please, please, please make sure your also need it otherwise you will shoot yourself in the foot.</li>
+<li>In my use-case, Kubernetes made sense. Please, please, please make sure you also need it otherwise you will shoot yourself in the foot.</li>
 </ul>
 <h3 id="prepare-your-app">Prepare your app</h3>
 <p>If you have made it this far, it would be safe to assume that you already have a Dockerized app. Programming language does not really matter, but for the sake of it, I used Python and Go while following those steps. Also, I will assume you already have a remote Docker registry.</p>
@@ -306,9 +306,9 @@ A <strong>service</strong> provides an abstract way to expose an application run
     -- serviceaccount.yaml
 - Chart.yaml
 - values.yaml
-</code></pre></div><p>Feel free to take a look inside. You will quickly understand that it is nothing extraordinary, and certainly not something very much different from the initial set of files that  <code>helm create mychart</code> produces, yet with adjustments to make it more usage-ready. The main differences are: 1) secrets support, 2) environment variables in containers - minor stuff.</p>
+</code></pre></div><p>Feel free to take a look inside. You will quickly understand that is nothing extraordinary, and certainly not something very much different from the initial set of files that  <code>helm create mychart</code> produces, yet with adjustments to make it more usage-ready. The main differences are: 1) secrets support, 2) environment variables in containers - minor stuff.</p>
 <h4 id="deploy-with-helm">Deploy with helm</h4>
-<p>I&rsquo;ve taken the extra step and created a remote chart repo using another great Github feature, Github Pages and <a href="https://www.koslib.com/mycharts/">published</a> my service template chart.</p>
+<p>I&rsquo;ve taken the extra step and created a remote chart repo using another great Github feature, Github Pages and published my <a href="https://www.koslib.com/mycharts/">service template chart</a>.</p>
 <p>Deploying using Helm is as easy as <code>helm install &lt;release name&gt; &lt;remote or local path to chart&gt; -f &lt;path to custom values file&gt;</code>. Therefore if you&rsquo;d like to use my own provided service chart you can do:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">helm upgrade --install myrelease http://www.koslib.com/mycharts/servicetpl-0.4.2.tgz -f .values.yaml
 </code></pre></div><h3 id="your-aws-eks-cluster">Your AWS EKS cluster</h3>
@@ -357,7 +357,7 @@ subjects:
 <p>Install nginx ingress controller using a NetworkLoadBalancer (<a href="https://aws.amazon.com/blogs/opensource/network-load-balancer-nginx-ingress-controller-eks/">instructions and info</a>).</p>
 </li>
 <li>
-<p>Follow <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm#step-4-%E2%80%94-securing-the-ingress-using-cert-manager">these</a>  DO&rsquo;s instructions for cert-manager support in <code>Ingress</code> resources. This is very helpful in order to automatically issue SSL certificates for your services&rsquo; endpoints.
+<p>Follow DO&rsquo;s <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm#step-4-%E2%80%94-securing-the-ingress-using-cert-manager">instructions</a> for cert-manager support in <code>Ingress</code> resources. This is very helpful in order to automatically issue SSL certificates for your services&rsquo; endpoints.
 s</p>
 </li>
 <li>
@@ -447,9 +447,9 @@ jobs:
 </code></pre></div><p>As you can see, there are a few AWS Account-related secrets to create on Github Secrets, and of course you will need to adapt your <code>helm install/upgrade</code> command as needed, but I&rsquo;m sure you have a grasp of the concept. Consider this as a guideline, so of course adapt accordingly.</p>
 <h3 id="environment-variables-and-secrets">Environment variables and secrets</h3>
 <h4 id="non-sensitive-information">Non sensitive information</h4>
-<p>Our good old env vars, every software enginees knows about them and nobody can live without them. Back in the day, env vars would contain anything. From app configuration flags used on startup to database connection strings.</p>
+<p>Our good old env vars, every software engineer knows about them and nobody can live without them. Back in the day, env vars would contain anything. From app configuration flags used on startup to database connection strings.</p>
 <p>In the containers world, we, thank God, opted for not storing sensitive information as plain text in the environment variables. And that is the notion of <em>secrets</em>.</p>
-<p>In kuberrnetes, there is a way to define the env variables of a container with a pretty neat way. Also, if you go down this road using my service template chart I referrenced above, you can just add a key-value set inside the <code>.values.yaml</code> file you create for your repository, and those will be exposed as env vars.</p>
+<p>In kubernetes, there is a way to define the env variables of a container with a pretty neat way. Also, if you go down this road using my service template chart I referenced above, you can just add a key-value set inside the <code>.values.yaml</code> file you created for your repository, and those will be exposed as env vars.</p>
 <p>Example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># .values.yaml
 ....
@@ -460,7 +460,7 @@ env:
     ...
 </code></pre></div><h4 id="sensitive-information">Sensitive information</h4>
 <p>What about the secrets though? How would you safely commit sensitive info inside your codebase, so that  GA could pick them up and add them as kubernetes secrets in your cluster, so that your containers could fetch and read them up later on?</p>
-<p><a href="https://github.com/zendesk/helm-secrets">Helm secrets</a> can help! Helm secrets is a plugin developed and maintained by Zendesk, which helps with encrypting/descrypting secrets while executing <code>helm install/upgrade</code> commands. Under the hood, it uses <a href="https://github.com/mozilla/sops">mozilla sops</a> to encrypt keys you provide, and you can use a managed key service to encrypt your sensitive info.</p>
+<p><a href="https://github.com/zendesk/helm-secrets">Helm secrets</a> can help! Helm secrets is a plugin developed and maintained by Zendesk, which helps with encrypting/decrypting secrets while executing <code>helm install/upgrade</code> commands. Under the hood, it uses <a href="https://github.com/mozilla/sops">mozilla sops</a> to encrypt keys you provide, and you can use a managed key service to encrypt your sensitive info.</p>
 <p>Briefly talking, the concept is to create a <code>secrets.yaml</code> file which would contain your sensitive info in plain text, <strong>initially</strong>. Example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">secrets:
     DATABASE_URL: postgres://username:password@host:port/db
@@ -468,7 +468,7 @@ env:
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">creation_rules:
   # Encrypt with AWS KMS
   - kms: &#39;arn:aws:kms:&lt;region&gt;:&lt;account_id&gt;:key/&lt;id&gt;&#39;
-</code></pre></div><p>And then using <code>helm secrets enc .secrets.yaml</code>, you will encrypt the content! Open up the file now, and confirm that this has worked out correctly for you as well. Also, more info on how sops works can be found <a href="https://github.com/mozilla/sops">here</a>. Not to forget, the <code>.secrets.yaml</code> file, after it&rsquo;s encrypted can be safely committed into your git repository.</p>
+</code></pre></div><p>And then using <code>helm secrets enc .secrets.yaml</code>, you will encrypt the content! Open up the file now, and confirm that this has worked out correctly for you as well. Also, more info on how sops works can be found <a href="https://github.com/mozilla/sops">here</a>. Not to forget, the <code>.secrets.yaml</code> file, after it&rsquo;s encry  pted can be safely committed into your git repository.</p>
 <p>That is exactly why in my service template chart before I extended the default version of it to include <code>Secrets</code>. Because now, by installing/upgrading a helm release and providing the <em>encrypted</em> <code>secrets.yaml</code> file as a file param, helm will create the secrets on kubernetes for your service, and will also expose them to your containers in a safe manner to be consumed.</p>
 <h3 id="glueing-everything-together">Glueing everything together</h3>
 <p>I&rsquo;m glad you made it this far, and really appreciate it!</p>
