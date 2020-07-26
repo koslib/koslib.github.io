@@ -60,7 +60,7 @@ Then I quickly realized that no good complete tutorials, or at least people talk
   "headline": "Deploy apps on Kubernetes with GitHub Actions - from start to finish",
   "description" : "After many years of using DroneCI, Gitlab or Travis for most of my projects, I thought to give Github Actions (GA) a try. My scope was to deploy a side-project I have on AWS EKS, but make it as automated as possible in every aspect.\nThen I quickly realized that no good complete tutorials, or at least people talking about their experience on this exact matter existed, and decided to write up my own.",
   "inLanguage" : "en",
-  "wordCount":  2373 ,
+  "wordCount":  2237 ,
   "datePublished" : "2020-07-25T00:00:00",
   "dateModified" : "2020-07-25T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -306,7 +306,7 @@ A <strong>service</strong> provides an abstract way to expose an application run
     -- serviceaccount.yaml
 - Chart.yaml
 - values.yaml
-</code></pre></div><p>Feel free to take a look inside. You will quickly understand that is nothing extraordinary, and certainly not something very much different from the initial set of files that  <code>helm create mychart</code> produces, yet with adjustments to make it more usage-ready. The main differences are: 1) secrets support, 2) environment variables in containers - minor stuff.</p>
+</code></pre></div><p>Feel free to <a href="https://www.koslib.com/mycharts/">take a look inside</a>. You will quickly understand that is nothing extraordinary, and certainly not something very much different from the initial set of files that  <code>helm create mychart</code> produces, yet with adjustments to make it more usage-ready. The main differences are: 1) secrets support, 2) environment variables in containers - minor stuff.</p>
 <h4 id="deploy-with-helm">Deploy with helm</h4>
 <p>I&rsquo;ve taken the extra step and created a remote chart repo using another great Github feature, Github Pages and published my <a href="https://www.koslib.com/mycharts/">service template chart</a>.</p>
 <p>Deploying using Helm is as easy as <code>helm install &lt;release name&gt; &lt;remote or local path to chart&gt; -f &lt;path to custom values file&gt;</code>. Therefore if you&rsquo;d like to use my own provided service chart you can do:</p>
@@ -379,36 +379,19 @@ s</p>
 <p>In step #4, I talked about authentication with the kubernetes cluster. Practically this means that the Github Action runner will need to be able to execute <code>kubectl</code>/<code>helm</code> commands inside our EKS cluster. If you followed the instructions from this post, you should have created the EKS cluster using <code>eksctl</code> tool, which appends the auth details to your new EKS cluster in your kube config file on your computer. However, this uses <code>aws-iam-authenticator</code>, a small tool which is used to securely authenticate with AWS resources.</p>
 <p>Again, with a brief look in the GA marketplace, I was not able to find an existing GA which would 1) authenticate on EKS with <code>aws-iam-authenticator</code> given the kubeconfig file and 2) execute helm commands. So, I rolled out my own dead-simple action which does exactly that: <a href="https://github.com/koslibpro/helm-eks-action">https://github.com/koslibpro/helm-eks-action</a>. You may feel free to use/extend it. The only thing you need to do is create a Github Secret in your project repository, named <code>KUBE_CONFIG_DATA</code>  and add in the value of that secret your kube config file in base64-encrypted form.</p>
 <p>A fully working example of a <code>.github/workflow/main.yml</code> follows below:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># This is a basic workflow to help you get started with Actions
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">name: CI
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches:
       - master
       - develop
 
-env:
-  DOCKER_IMAGE: # fill this in
-  REGISTRY_REPO_NAME: # fill this in
-  AWS_REGION: us-east-1 # change as needed
-  EKS_CLUSTER_NAME: # fill this in
-  K8S_DEPLOYMENT: # fill this in
-  K8S_NAMESPACE: default # change as needed
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called &#34;build&#34;
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
