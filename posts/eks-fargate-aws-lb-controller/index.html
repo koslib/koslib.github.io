@@ -310,7 +310,7 @@ ingress:
 <li>Right-sizing Fargate-running pods can be difficult. A common approach is to use VPA (Vertical Pod Autoscaling) first, let the app run, and then define the correct resources and switch to HPA (Horizontal Pod Autoscaling).</li>
 <li><code>256Mb</code> are added on top by Fargate for side-loaded components. Keep this in mind when selecting sizes.</li>
 <li>SecurityGroups for pods do not work on fargate (<a href="https://docs.aws.amazon.com/eks/latest/userguide/security-groups-for-pods.html">relevant docs</a>).</li>
-<li>Fargate pods run only on private subnets. Keep track of internet-bound egress traffic, as this would spice up your NAT Gateway costs, if you&rsquo;re not using an ECR VPC Endpooint.</li>
+<li>Fargate pods run only on private subnets. Keep track of internet-bound egress traffic, as this would spice up your NAT Gateway costs, if you&rsquo;re not using an ECR VPC Endpoint.</li>
 </ul>
 
 
