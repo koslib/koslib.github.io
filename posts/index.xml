@@ -6,10 +6,16 @@
     <description>Recent content in Posts on koslib</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.koslib.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 23 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.koslib.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Experimenting with EKS Fargate profiles and AWS LB Controller</title>
+      <link>https://www.koslib.com/posts/eks-fargate-aws-lb-controller/</link>
+      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.koslib.com/posts/eks-fargate-aws-lb-controller/</guid>
+      <description>Intro With more and more apps running on Kubernetes, EKS is definitely one of the best managed-Kubernetes options in the market. I have personally been using EKS in production applications for the last year or so. Up until recently, most deployments on EKS where made using an NLB (Network Load Balancer), as creating an ALB (Application Load Balancer) for every service is cost-wise at least suboptimal.
+The latest version of AWS Load Balancer Controller, an ingress controller by AWS, was published a few weeks ago The biggest feature introduced was the support for NLBs as well as ALBs shared accross services.</description>
+    </item>
     
     <item>
       <title>Deploy apps on Kubernetes with GitHub Actions - from start to finish</title>
