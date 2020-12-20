@@ -313,7 +313,7 @@ ingress:
 <li>Fargate pods run only on private subnets. Keep track of internet-bound egress traffic, as this would spice up your NAT Gateway costs, if you&rsquo;re not using an ECR VPC Endpoint.</li>
 <li>DaemonSets are not supported at the time of writing in Fargate, although there is <a href="https://github.com/aws/containers-roadmap/issues/971">an open issue</a> in AWS containers roadmap. This means exporting logs (eg. using Promtail) is not as trivial as it is with the rest of your node-running pods.</li>
 </ul>
-<p><em>[Update 20-Dec-2020: Added note for missing DaemonSet support in Fargate]</em></p>
+<p><em>[Update (20-Dec-2020): Added note for missing DaemonSet support in Fargate]</em></p>
 
 
         
