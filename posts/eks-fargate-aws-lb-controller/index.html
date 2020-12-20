@@ -60,7 +60,7 @@ The latest version of AWS Load Balancer Controller, an ingress controller by AWS
   "headline": "Experimenting with EKS Fargate profiles and AWS LB Controller",
   "description" : "Intro With more and more apps running on Kubernetes, EKS is definitely one of the best managed-Kubernetes options in the market. I have been using EKS in production applications for the last year or so. Up until recently, most deployments on EKS were made using an NLB (Network Load Balancer), as creating an ALB (Application Load Balancer) for every service is at least cost-wise suboptimal.\nThe latest version of AWS Load Balancer Controller, an ingress controller by AWS, was published a few weeks ago.",
   "inLanguage" : "en",
-  "wordCount":  776 ,
+  "wordCount":  775 ,
   "datePublished" : "2020-11-23T00:00:00",
   "dateModified" : "2020-11-23T00:00:00",
   "image" : "https:\/\/www.koslib.com\/img\/me_rect.jpg",
@@ -313,7 +313,7 @@ ingress:
 <li>Fargate pods run only on private subnets. Keep track of internet-bound egress traffic, as this would spice up your NAT Gateway costs, if you&rsquo;re not using an ECR VPC Endpoint.</li>
 <li>DaemonSets are not supported at the time of writing in Fargate, although there is <a href="https://github.com/aws/containers-roadmap/issues/971">an open issue</a> in AWS containers roadmap. This means exporting logs (eg. using Promtail) is not as trivial as it is with the rest of your node-running pods.</li>
 </ul>
-<p><em>[Update on 20-Dec-2020: Added note for missing DaemonSet support in Fargate]</em></p>
+<p><em>[Update 20-Dec-2020: Added note for missing DaemonSet support in Fargate]</em></p>
 
 
         
